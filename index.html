@@ -9,8 +9,7 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
 
 <body>
@@ -139,11 +138,7 @@
             Nombre del producto
           </label>
 
-          <input
-            id="f-name"
-            type="text"
-            placeholder="Ej. Mouse Gamer"
-            oninput="clearError('f-name')"
+          <input id="f-name" type="text" placeholder="Ej. Mouse Gamer" oninput="clearError('f-name')"
             onblur="validateName()">
 
           <span class="sl-error" id="err-name"></span>
@@ -157,9 +152,7 @@
             Categoría
           </label>
 
-          <select
-            id="f-cat"
-            onchange="clearError('f-cat')">
+          <select id="f-cat" onchange="clearError('f-cat')">
 
             <option value="">
               Seleccionar...
@@ -185,12 +178,7 @@
             Cantidad
           </label>
 
-          <input
-            id="f-qty"
-            type="text"
-            inputmode="numeric"
-            placeholder="Ej. 12"
-            oninput="onlyNumbers(this,'f-qty')"
+          <input id="f-qty" type="text" inputmode="numeric" placeholder="Ej. 12" oninput="onlyNumbers(this,'f-qty')"
             onblur="validateQty()">
 
           <span class="sl-error" id="err-qty"></span>
@@ -204,22 +192,15 @@
             Precio (USD)
           </label>
 
-          <input
-            id="f-price"
-            type="text"
-            inputmode="decimal"
-            placeholder="Ej. 25.00"
-            oninput="onlyDecimals(this,'f-price')"
-            onblur="validatePrice()">
+          <input id="f-price" type="text" inputmode="decimal" placeholder="Ej. 25.00"
+            oninput="onlyDecimals(this,'f-price')" onblur="validatePrice()">
 
           <span class="sl-error" id="err-price"></span>
 
         </div>
 
         <!-- BOTÓN AGREGAR -->
-        <button
-          class="sl-btn sl-btn-primary"
-          onclick="saveProduct()">
+        <button class="sl-btn sl-btn-primary" onclick="saveProduct()">
 
           <i class="ti ti-check"></i>
 
@@ -230,10 +211,7 @@
         </button>
 
         <!-- BOTÓN CANCELAR -->
-        <button
-          id="cancel-btn"
-          class="sl-btn sl-btn-cancel"
-          onclick="cancelEdit()">
+        <button id="cancel-btn" class="sl-btn sl-btn-cancel" onclick="cancelEdit()">
 
           <i class="ti ti-x"></i>
 
@@ -260,17 +238,17 @@
           </div>
 
           <div class="sl-header-right">
+            <button class="sl-export-btn" onclick="exportCSV()">
+              <i class="ti ti-file-spreadsheet"></i>
+              Exportar CSV
+            </button>
 
             <!-- BÚSQUEDA -->
             <div class="sl-search">
 
               <i class="ti ti-search"></i>
 
-              <input
-                type="text"
-                id="search-input"
-                placeholder="Buscar producto..."
-                oninput="renderTable()">
+              <input type="text" id="search-input" placeholder="Buscar producto..." oninput="renderTable()">
 
             </div>
 
@@ -325,4 +303,5 @@
   <script src="app.js"></script>
 
 </body>
+
 </html>
