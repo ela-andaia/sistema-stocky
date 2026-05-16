@@ -16,6 +16,9 @@ let products = [
 ];
 
 let editingIndex = -1;
+let currentPage = 1;
+let totalPages = 1;
+const PAGE_SIZE = 7;
 
 // ════════════════════════════════════════════════════════════
 //  VALIDACIONES DESACTIVADAS
@@ -132,6 +135,12 @@ function getFiltered() {
 function renderTable() {
 
   const filtered = getFiltered();
+  const pagWrap = document.getElementById('sl-pagination');
+
+totalPages = Math.max(
+ 1,
+ Math.ceil(filtered.length / PAGE_SIZE)
+);
 
   const tb = document.getElementById('product-table');
 
@@ -142,15 +151,26 @@ function renderTable() {
     tb.innerHTML = '';
 
     empty.style.display = 'block';
+if (pagWrap) {
 
+  pagWrap.innerHTML = `
+    <button onclick="prevPage()">Anterior</button>
+    <span>Página ${currentPage} de ${totalPages}</span>
+    <button onclick="nextPage()">Siguiente</button>
+  `;
+}
     updateStats();
 
     return;
   }
 
   empty.style.display = 'none';
+  const start = (currentPage - 1) * PAGE_SIZE;
+const end = start + PAGE_SIZE;
 
-  tb.innerHTML = filtered.map((p, idx) => {
+const pageItems = filtered.slice(start, end);
+
+  tb.innerHTML = pageItems.map((p, idx) => {
 
     const realIdx = products.indexOf(p);
 
