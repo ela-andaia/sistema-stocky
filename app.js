@@ -147,6 +147,12 @@ totalPages = Math.max(
   const empty = document.getElementById('empty-state');
 
   if (filtered.length === 0) {
+ tb.innerHTML = '';
+ empty.style.display = 'block';
+ pagWrap.style.display = 'none';
+ updateStats();
+ return;
+}
 
     tb.innerHTML = '';
 
@@ -164,13 +170,18 @@ if (pagWrap) {
     return;
   }
 
-  empty.style.display = 'none';
-  const start = (currentPage - 1) * PAGE_SIZE;
-const end = start + PAGE_SIZE;
+empty.style.display = 'none';
+pagWrap.style.display = 'flex';
+const start =
+ (currentPage - 1) * PAGE_SIZE;
+const slice = filtered.slice(
+ start,
+ start + PAGE_SIZE
+);
 
 const pageItems = filtered.slice(start, end);
 
-  tb.innerHTML = pageItems.map((p, idx) => {
+  tb.innerHTML = slice.map((p, idx) => {
 
     const realIdx = products.indexOf(p);
 
@@ -194,7 +205,7 @@ const pageItems = filtered.slice(start, end);
       <tr>
 
         <td class="row-num">
-          ${idx + 1}
+          ${start + idx + 1}
         </td>
 
         <td style="font-weight:600;color:#1e293b">
@@ -250,10 +261,10 @@ const pageItems = filtered.slice(start, end);
     `;
 
   }).join('');
+renderPagination(filtered.length);
 
   updateStats();
 }
-
 // ── Sanitizar HTML ────────────────────────────────────────
 
 function escHtml(str) {
@@ -262,6 +273,84 @@ function escHtml(str) {
     .replace(/&/g,'&amp;')
     .replace(/</g,'&lt;')
     .replace(/>/g,'&gt;');
+}
+
+nction goToPage(n) {
+ const filtered = getFiltered();
+ totalPages = Math.max(
+ 1,
+ Math.ceil(filtered.length / PAGE_SIZE)
+ );
+ currentPage = Math.max(
+ 1,
+ Math.min(n, totalPages)
+ );
+ renderTable();
+}
+function renderPagination(total) {
+ const info =
+ document.getElementById('page-info');
+ const nums =
+ document.getElementById('page-numbers');
+ const btnFirst =
+ document.getElementById('btn-first');
+ const btnPrev =
+ document.getElementById('btn-prev');
+ const btnNext =
+ document.getElementById('btn-next');
+ const btnLast =
+ document.getElementById('btn-last');
+ const start =
+ (currentPage - 1) * PAGE_SIZE + 1;
+ const end =
+ Math.min(currentPage * PAGE_SIZE, total);
+ info.textContent =
+ `Mostrando ${start}-${end} de ${total} productos`;
+ btnFirst.disabled = currentPage === 1;
+ btnPrev.disabled = currentPage === 1;
+ btnNext.disabled = currentPage === totalPages;
+ btnLast.disabled = currentPage === totalPages;
+ let pages = [];
+ if (totalPages <= 5) {
+ for (let i = 1; i <= totalPages; i++) {
+ pages.push(i);
+ }
+ } else {
+ pages = [1];
+ let lo = Math.max(
+ 2,
+ currentPage - 1
+ );
+ let hi = Math.min(
+ totalPages - 1,
+ currentPage + 1
+ );
+ if (lo > 2) pages.push('...');
+ for (let i = lo; i <= hi; i++) {
+ pages.push(i);
+ }
+ if (hi < totalPages - 1) {
+ pages.push('...');
+ }
+ pages.push(totalPages);
+ }
+nums.innerHTML = pages.map(p => {
+ if (p === '...') {
+ return `
+ <span class="sl-page-num"
+ style="cursor:default;border:none">
+ ...
+ </span>
+ `;
+ }
+ return `
+ <button
+ class="sl-page-num ${p === currentPage ? 'active' : ''}"
+ onclick="goToPage(${p})">
+ ${p}
+ </button>
+ `;
+ }).join('');
 }
 
 // ════════════════════════════════════════════════════════════
@@ -422,3 +511,17 @@ function setDate() {
 setDate();
 
 renderTable();
+
+function nextPage() {
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderTable();
+  }
+}
+
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    renderTable();
+  }
+}

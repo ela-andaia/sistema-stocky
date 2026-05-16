@@ -270,7 +270,7 @@
                 type="text"
                 id="search-input"
                 placeholder="Buscar producto..."
-                oninput="renderTable()">
+                oninput="currentPage = 1; renderTable()">
 
             </div>
 
@@ -282,7 +282,7 @@
         <div class="sl-table-wrap">
 
           <table>
-
+          
             <thead>
 
               <tr>
@@ -302,7 +302,33 @@
             <tbody id="product-table"></tbody>
 
           </table>
+          <div class="sl-pagination" id="sl-pagination">
 
+            <span class="sl-page-info" id="page-info"></span>
+
+            <div class="sl-page-controls">
+
+              <button class="sl-page-btn" id="btn-first" onclick="goToPage(1)">
+               <i class="ti ti-chevrons-left"></i>
+              </button>
+
+              <button class="sl-page-btn" id="btn-prev" onclick="goToPage(currentPage-1)">
+               <i class="ti ti-chevron-left"></i>
+              </button>
+
+              <div id="page-numbers" class="sl-page-numbers"></div>
+ 
+              <button class="sl-page-btn" id="btn-next" onclick="goToPage(currentPage+1)">
+               <i class="ti ti-chevron-right"></i>
+              </button>
+
+              <button class="sl-page-btn" id="btn-last" onclick="goToPage(totalPages)">
+               <i class="ti ti-chevrons-right"></i>
+              </button>
+
+            </div>
+
+          </div>
           <!-- EMPTY -->
           <div id="empty-state" class="sl-empty">
 
