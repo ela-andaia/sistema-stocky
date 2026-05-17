@@ -187,6 +187,7 @@
         <!-- TABLA -->
         <div class="sl-table-wrap">
           <table>
+
             <thead>
               <tr>
                 <th>#</th>
@@ -202,15 +203,40 @@
             <tbody id="product-table"></tbody>
           </table>
 
+          <div class="sl-pagination" id="sl-pagination">
 
-          <!-- EMPTY -->
-          <div id="empty-state" class="sl-empty">
-            <i class="ti ti-package-off"></i>
+            <span class="sl-page-info" id="page-info"></span>
 
-            <p>Sin productos. ¡Agrega el primero!</p>
+            <div class="sl-page-controls">
+
+              <button class="sl-page-btn" id="btn-first">
+                <i class="ti ti-chevrons-left"></i>
+              </button>
+
+              <button class="sl-page-btn" id="btn-prev">
+                <i class="ti ti-chevron-left"></i>
+              </button>
+
+              <div id="page-numbers" class="sl-page-numbers"></div>
+
+              <button class="sl-page-btn" id="btn-next">
+                <i class="ti ti-chevron-right"></i>
+              </button>
+
+              <button class="sl-page-btn" id="btn-last">
+                <i class="ti ti-chevrons-right"></i>
+              </button>
+
+            </div>
+
+            <!-- EMPTY -->
+            <div id="empty-state" class="sl-empty">
+              <i class="ti ti-package-off"></i>
+
+              <p>Sin productos. ¡Agrega el primero!</p>
+            </div>
           </div>
         </div>
-      </div>
     </section>
   </main>
 

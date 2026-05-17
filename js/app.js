@@ -4,8 +4,18 @@ import { validateFieldById } from "./validate_input.js";
 import { data } from "./data/products.js";
 import categories from "./data/categories.js";
 import exportCSV from "./exportCSV.js";
+import { renderPagination, goToPage, nextPage, prevPage } from "./pagination.js";
 
 export let products = data;
+export let currentPage = 1;
+export let totalPages = 1;
+export const PAGE_SIZE = 7;
+
+export const setTotalPages = (total) => totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+export const setCurrentPage = (n) => currentPage = n;
+
+
 
 //Obtengo los elementos del DOM
 const nameInput = document.getElementById("f-name");
@@ -41,6 +51,15 @@ saveBtn.addEventListener("click", () => {
 cancelBtn.addEventListener("click", () => cancelEdit());
 searchInput.addEventListener("input", () => renderTable());
 exportBtn.addEventListener("click", () => exportCSV());
+
+
+// Asignar listeners a los botones de paginación
+document.getElementById("btn-first").addEventListener("click", () => goToPage(1));
+document.getElementById("btn-prev").addEventListener("click", () => prevPage());
+document.getElementById("btn-next").addEventListener("click", () => nextPage());
+document.getElementById("btn-last").addEventListener("click", () => goToPage(totalPages));
+
+
 
 // ════════════════════════════════════════════════════════════
 //  STATS

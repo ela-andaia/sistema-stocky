@@ -754,3 +754,62 @@ td.row-num {
 .sl-export-btn i {
   font-size: 15px;
 }
+
+.sl-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-top: 1px solid #f1f5f9;
+  background: #fafbfc;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sl-page-info {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.sl-page-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sl-page-numbers {
+  display: flex;
+  gap: 3px;
+}
+
+.sl-page-btn,
+.sl-page-num {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #475569;
+  transition: all .15s;
+}
+
+.sl-page-btn:hover,
+.sl-page-num:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+.sl-page-num.active {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.sl-page-btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}

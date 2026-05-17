@@ -1,6 +1,7 @@
 import { setOk, escHtml, clearForm } from "./utils.js";
-import { updateStats, cancelEdit, products } from "./app.js";
+import { updateStats, cancelEdit, products, PAGE_SIZE, currentPage, setTotalPages } from "./app.js";
 import { validateAll } from "./validate_input.js";
+import { renderPagination } from "./pagination.js";
 
 export let editingId = null;
 
@@ -15,26 +16,32 @@ export function renderTable() {
 
 
   const tb = document.getElementById("product-table");
-
   const empty = document.getElementById("empty-state");
+  const pagWrap = document.getElementById('sl-pagination');
+
+  setTotalPages(filtered.length);
+
 
   if (filtered.length === 0) {
     tb.innerHTML = "";
-
     empty.style.display = "block";
-
+    pagWrap.style.display = 'none';
     updateStats();
-
     return;
   }
 
+  pagWrap.style.display = 'flex';
+
   empty.style.display = "none";
 
-  tb.innerHTML = filtered
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+  const slice = filtered.slice(start, end);
+
+  tb.innerHTML = slice
     .map((p) => {
 
       const qtyValue = parseFloat(p.qty) || 0;
-
       const priceVal = parseFloat(p.price) || 0;
 
       const stockBadge =
@@ -121,6 +128,8 @@ export function renderTable() {
     });
   });
 
+  // Actualiza la paginación
+  renderPagination(filtered.length);
   updateStats();
 }
 
