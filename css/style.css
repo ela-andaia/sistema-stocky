@@ -691,7 +691,8 @@ td.row-num {
   }
 }
 
-/* ── ESTADOS DE LOS CAMPOS ─────────────────────────────────────────────── */
+/* ── VALIDACIÓN ─────────────────────────────────────────── */
+
 .sl-field input.is-error,
 .sl-field select.is-error {
  border-color: #ef4444;
