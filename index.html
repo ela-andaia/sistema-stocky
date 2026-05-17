@@ -1,194 +1,196 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Stocky — Sistema de Inventario</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="../css/style.css" />
+  <title>Stocky — Sistema de Inventario</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
-    />
-  </head>
+  <link rel="stylesheet" href="../css/style.css" />
 
-  <body>
-    <!-- TOPBAR -->
-    <header class="sl-topbar">
-      <div class="sl-brand">
-        <div class="sl-logo">
-          <i class="ti ti-package"></i>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+
+<body>
+  <!-- TOPBAR -->
+  <header class="sl-topbar">
+    <div class="sl-brand">
+      <div class="sl-logo">
+        <i class="ti ti-package"></i>
+      </div>
+
+      <div>
+        <h1>Stocky</h1>
+        <p>Sistema de Inventario</p>
+      </div>
+    </div>
+
+    <div class="sl-topbar-right">
+      <span class="sl-date" id="sl-date"></span>
+
+      <div class="sl-avatar">AD</div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="sl-main">
+    <!-- STATS -->
+    <section class="sl-stats-row">
+      <div class="sl-stat-card green">
+        <div class="sl-stat-icon">
+          <i class="ti ti-box"></i>
         </div>
 
-        <div>
-          <h1>Stocky</h1>
-          <p>Sistema de Inventario</p>
+        <div class="sl-stat-info">
+          <label>Total productos</label>
+          <span id="stat-total">0</span>
+          <small>en inventario</small>
         </div>
       </div>
 
-      <div class="sl-topbar-right">
-        <span class="sl-date" id="sl-date"></span>
+      <div class="sl-stat-card blue">
+        <div class="sl-stat-icon">
+          <i class="ti ti-currency-dollar"></i>
+        </div>
 
-        <div class="sl-avatar">AD</div>
+        <div class="sl-stat-info">
+          <label>Valor inventario</label>
+          <span id="stat-value">$0.00</span>
+          <small>valor total</small>
+        </div>
       </div>
-    </header>
 
-    <!-- MAIN -->
-    <main class="sl-main">
-      <!-- STATS -->
-      <section class="sl-stats-row">
-        <div class="sl-stat-card green">
-          <div class="sl-stat-icon">
-            <i class="ti ti-box"></i>
-          </div>
-
-          <div class="sl-stat-info">
-            <label>Total productos</label>
-            <span id="stat-total">0</span>
-            <small>en inventario</small>
-          </div>
+      <div class="sl-stat-card orange">
+        <div class="sl-stat-icon">
+          <i class="ti ti-alert-triangle"></i>
         </div>
 
-        <div class="sl-stat-card blue">
-          <div class="sl-stat-icon">
-            <i class="ti ti-currency-dollar"></i>
-          </div>
+        <div class="sl-stat-info">
+          <label>Stock bajo</label>
+          <span id="stat-low">0</span>
+          <small>menos de 5 unidades</small>
+        </div>
+      </div>
 
-          <div class="sl-stat-info">
-            <label>Valor inventario</label>
-            <span id="stat-value">$0.00</span>
-            <small>valor total</small>
-          </div>
+      <div class="sl-stat-card purple">
+        <div class="sl-stat-icon">
+          <i class="ti ti-chart-bar"></i>
         </div>
 
-        <div class="sl-stat-card orange">
-          <div class="sl-stat-icon">
-            <i class="ti ti-alert-triangle"></i>
-          </div>
+        <div class="sl-stat-info">
+          <label>Categorías</label>
+          <span id="stat-cats">0</span>
+          <small>distintas</small>
+        </div>
+      </div>
+    </section>
 
-          <div class="sl-stat-info">
-            <label>Stock bajo</label>
-            <span id="stat-low">0</span>
-            <small>menos de 5 unidades</small>
-          </div>
+    <!-- BODY -->
+    <section class="sl-body">
+      <!-- FORMULARIO -->
+      <div class="sl-form-card">
+        <div class="sl-card-header">
+          <i class="ti ti-circle-plus"></i>
+
+          <h2 id="form-title">Agregar producto</h2>
         </div>
 
-        <div class="sl-stat-card purple">
-          <div class="sl-stat-icon">
-            <i class="ti ti-chart-bar"></i>
-          </div>
+        <!-- Barra edición -->
+        <div id="editing-bar" class="sl-editing-bar">
+          <i class="ti ti-pencil"></i>
 
-          <div class="sl-stat-info">
-            <label>Categorías</label>
-            <span id="stat-cats">0</span>
-            <small>distintas</small>
-          </div>
-        </div>
-      </section>
-
-      <!-- BODY -->
-      <section class="sl-body">
-        <!-- FORMULARIO -->
-        <div class="sl-form-card">
-          <div class="sl-card-header">
-            <i class="ti ti-circle-plus"></i>
-
-            <h2 id="form-title">Agregar producto</h2>
-          </div>
-
-          <!-- Barra edición -->
-          <div id="editing-bar" class="sl-editing-bar">
-            <i class="ti ti-pencil"></i>
-
-            Modo edición activo
-          </div>
-
-          <!-- Nombre -->
-          <div class="sl-field">
-            <label for="f-name"> Nombre del producto </label>
-
-            <input id="f-name" type="text" placeholder="Ej. Mouse Gamer" />
-
-            <span class="sl-error" id="err-name"></span>
-          </div>
-
-          <!-- Categoría -->
-          <div class="sl-field">
-            <label for="f-cat"> Categoría </label>
-
-            <select id="f-cat">
-              <option value="">Seleccionar...</option>
-            </select>
-
-            <span class="sl-error" id="err-cat"></span>
-          </div>
-
-          <!-- Cantidad -->
-          <div class="sl-field">
-            <label for="f-qty"> Cantidad </label>
-
-            <input
-              id="f-qty"
-              type="text"
-              inputmode="numeric"
-              placeholder="Ej. 12"
-            />
-
-            <span class="sl-error" id="err-qty"></span>
-          </div>
-
-          <!-- Precio -->
-          <div class="sl-field">
-            <label for="f-price"> Precio (USD) </label>
-
-            <input
-              id="f-price"
-              type="text"
-              inputmode="decimal"
-              placeholder="Ej. 25.00"
-            />
-
-            <span class="sl-error" id="err-price"></span>
-          </div>
-
-          <!-- BOTÓN AGREGAR -->
-          <button class="sl-btn sl-btn-primary">
-            <i class="ti ti-check"></i>
-
-            <span id="btn-label"> Agregar producto </span>
-          </button>
-
-          <!-- BOTÓN CANCELAR -->
-          <button id="cancel-btn" class="sl-btn sl-btn-cancel">
-            <i class="ti ti-x"></i>
-
-            Cancelar
-          </button>
+          Modo edición activo
         </div>
 
-        <!-- TABLA -->
-        <div class="sl-table-card">
-          <!-- HEADER TABLA -->
-          <div class="sl-card-header">
-            <div class="sl-header-left">
-              <i class="ti ti-table"></i>
+        <!-- Nombre -->
+        <div class="sl-field">
+          <label for="f-name"> Nombre del producto </label>
 
-              <h2>Productos</h2>
-            </div>
+          <input id="f-name" type="text" placeholder="Ej. Mouse Gamer" oninput="clearError('f-name')"
+            onblur="validateName()">
 
-            <div class="sl-header-right">
-              <!-- BÚSQUEDA -->
-              <div class="sl-search">
-                <i class="ti ti-search"></i>
+          <span class="sl-error" id="err-name"></span>
+        </div>
 
-                <input
-                  type="text"
-                  id="search-input"
-                  placeholder="Buscar producto..."
-                />
-              </div>
+        <!-- Categoría -->
+        <div class="sl-field">
+          <label for="f-cat"> Categoría </label>
+
+          <select id="f-cat" onchange="clearError('f-cat')">
+
+            <option value="">
+              Seleccionar...
+            </option>
+
+            <option>Tecnología</option>
+            <option>Ropa</option>
+            <option>Alimentos</option>
+            <option>Hogar</option>
+            <option>Oficina</option>
+            <option>Otro</option>
+
+          </select>
+
+          <span class="sl-error" id="err-cat"></span>
+        </div>
+
+        <!-- Cantidad -->
+        <div class="sl-field">
+          <label for="f-qty"> Cantidad </label>
+
+          <input id="f-qty" type="text" inputmode="numeric" placeholder="Ej. 12" oninput="onlyNumbers(this,'f-qty')"
+            onblur="validateQty()">
+
+          <span class="sl-error" id="err-qty"></span>
+        </div>
+
+        <!-- Precio -->
+        <div class="sl-field">
+          <label for="f-price"> Precio (USD) </label>
+
+          <input id="f-price" type="text" inputmode="decimal" placeholder="Ej. 25.00"
+            oninput="onlyDecimals(this,'f-price')" onblur="validatePrice()">
+
+          <span class="sl-error" id="err-price"></span>
+        </div>
+
+        <!-- BOTÓN AGREGAR -->
+        <button class="sl-btn sl-btn-primary" onclick="saveProduct()">
+
+          <i class="ti ti-check"></i>
+
+          <span id="btn-label"> Agregar producto </span>
+        </button>
+
+        <!-- BOTÓN CANCELAR -->
+        <button id="cancel-btn" class="sl-btn sl-btn-cancel" onclick="cancelEdit()">
+
+          <i class="ti ti-x"></i>
+
+          Cancelar
+        </button>
+      </div>
+
+      <!-- TABLA -->
+      <div class="sl-table-card">
+        <!-- HEADER TABLA -->
+        <div class="sl-card-header">
+          <div class="sl-header-left">
+            <i class="ti ti-table"></i>
+
+            <h2>Productos</h2>
+          </div>
+
+          <div class="sl-header-right">
+
+            <!-- BÚSQUEDA -->
+            <div class="sl-search">
+
+              <i class="ti ti-search"></i>
+
+              <input type="text" id="search-input" placeholder="Buscar producto..." oninput="renderTable()">
+
             </div>
           </div>
 
@@ -218,9 +220,11 @@
             </div>
           </div>
         </div>
-      </section>
-    </main>
+    </section>
+  </main>
 
-    <script type="module" src="../js/app.js"></script>
-  </body>
+  <script src="app.js"></script>
+
+</body>
+
 </html>

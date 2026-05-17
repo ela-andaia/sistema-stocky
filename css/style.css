@@ -1,5 +1,6 @@
-
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -31,7 +32,7 @@ body {
 
   z-index: 10;
 
-  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
 }
 
 .sl-brand {
@@ -145,7 +146,7 @@ body {
 .sl-stat-card:hover {
   transform: translateY(-2px);
 
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .sl-stat-icon {
@@ -250,8 +251,8 @@ body {
   flex-wrap: wrap;
 }
 
-.sl-card-header > i,
-.sl-header-left > i {
+.sl-card-header>i,
+.sl-header-left>i {
   font-size: 18px;
   color: #2563eb;
 }
@@ -356,7 +357,7 @@ body {
 
   background: #fff;
 
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
 }
 
 /* Estados visuales */
@@ -367,7 +368,7 @@ body {
 
   background: #fff5f5;
 
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.08);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
 }
 
 .sl-field input.is-ok {
@@ -695,19 +696,61 @@ td.row-num {
 
 .sl-field input.is-error,
 .sl-field select.is-error {
- border-color: #ef4444;
- background: #fff5f5;
- box-shadow: 0 0 0 3px rgba(239,68,68,0.08);
+  border-color: #ef4444;
+  background: #fff5f5;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
 }
+
 .sl-field input.is-ok {
- border-color: #22c55e;
- background: #f0fdf4;
+  border-color: #22c55e;
+  background: #f0fdf4;
 }
+
 .sl-error {
- display: block;
- font-size: 11.5px;
- color: #ef4444;
- margin-top: 4px;
- min-height: 16px;
- font-weight: 500;
+  display: block;
+  font-size: 11.5px;
+  color: #ef4444;
+  margin-top: 4px;
+  min-height: 16px;
+  font-weight: 500;
+}
+
+/*-----------------------------------------*/
+.sl-export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 7px 14px;
+
+  background: #fff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  color: #16a34a;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  transition: all .15s;
+
+  white-space: nowrap;
+}
+
+.sl-export-btn:hover {
+  background: #dcfce7;
+
+  border-color: #86efac;
+
+  color: #15803d;
+}
+
+.sl-export-btn i {
+  font-size: 15px;
 }
