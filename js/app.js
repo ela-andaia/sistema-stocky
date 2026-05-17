@@ -1,8 +1,9 @@
 import { clearForm, setDate, clearError } from "./utils.js";
-import { renderTable, saveProduct, resetEditingId} from "./crud.js";
+import { renderTable, saveProduct, resetEditingId } from "./crud.js";
 import { validateFieldById } from "./validate_input.js";
 import { data } from "./data/products.js";
 import categories from "./data/categories.js";
+import exportCSV from "./exportCSV.js";
 
 export let products = data;
 
@@ -14,6 +15,7 @@ const priceInput = document.getElementById("f-price");
 const saveBtn = document.querySelector(".sl-btn-primary");
 const cancelBtn = document.getElementById("cancel-btn");
 const searchInput = document.getElementById("search-input");
+const exportBtn = document.querySelector(".sl-export-btn");
 
 // Agrega los event listeners para validar los campos del formulario en tiempo real y al perder el foco
 [nameInput, categoryInput, qtyInput, priceInput].forEach((input) => {
@@ -38,6 +40,7 @@ saveBtn.addEventListener("click", () => {
 });
 cancelBtn.addEventListener("click", () => cancelEdit());
 searchInput.addEventListener("input", () => renderTable());
+exportBtn.addEventListener("click", () => exportCSV());
 
 // ════════════════════════════════════════════════════════════
 //  STATS
@@ -75,7 +78,7 @@ export function cancelEdit() {
   document.getElementById("editing-bar").style.display = "none";
 
   resetEditingId();
-  
+
 }
 
 // ── INIT ─────────────────────────────────────────────────────
