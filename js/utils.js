@@ -36,8 +36,13 @@ export function clearError(fieldId) {
 
 
 // Sanitiza una cadena para mostrarla como texto sin interpretar etiquetas HTML
-export function escHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+function escHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')   // ← Bloquea XSS en atributos del DOM
+    .replace(/'/g, '&#x27;');  // ← Bloquea XSS en atributos del DOM
 }
 
 export function setDate() {
